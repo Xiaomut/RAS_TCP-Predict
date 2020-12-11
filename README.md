@@ -34,5 +34,5 @@ python test_for_exp1.py [filename]
 ## Finally
 代码中肯定有不正确的地方，如果有需求，可以联系我。实验完成后如果不接触这方面内容就不会再更新
 
-email: `hunt_hak@outlook.com`
+email: `hunt_hak@outlook.com` </br>
 name: `小木`
