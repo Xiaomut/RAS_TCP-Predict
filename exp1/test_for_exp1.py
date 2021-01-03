@@ -112,20 +112,18 @@ if __name__ == "__main__":
     test_datas['distance'] = distances
 
     # 4. 对 Activity 这一列进行 one-hot 化
-    df_activity = pd.get_dummies(test_datas['Activity'])
+    df_activity = pd.get_dummies(test_datas['Activity'], prefix='Activity')
     test_datas_final = pd.concat([test_datas, df_activity], axis=1)
 
     # 5. 组成特征
     features = test_datas_final[[
-        'A', 'D', 'K_A', 'K_V', 'V', 'distance', 'PreDelay_min', 'residual',
-        'PlannedTime'
+        'Activity_A', 'Activity_D', 'Activity_K_A', 'Activity_K_V', 'Activity_V', 'distance', 'PreDelay_min', 'residual'
     ]]
 
     # 6. 加载模型
     clf = joblib.load('./models/exp1_model.pkl')
     # 7. 预测结果
-
-    ss_X = StandardScaler()
-    features = ss_X.fit_transform(features)
     predict = clf.predict(features)
     print(predict)
+    
+    print(f'The mean squared error of linear regression is {mean_squared_error(test_datas_final[["Delay_min"]], predict):.4f}')
